@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+
+  postgres:
+    image: postgres:14.4-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - .postgres-data:/var/lib/postgresql/data
+    container_name: django_postgres
+
+  django_app:
+    build: .
+    command: gunicorn blog.wsgi:application --bind 0.0.0.0:8000
+    restart: always
+    ports:
+      - "80:5000"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    volumes:
+      - .log:/log
+    container_name: django_app
+
+#services:
+#    backend:
+#        restart: always
+#        build: .
+#        command: bash -c "python manage.py runserver 0.0.0.0:8000"
+#        ports: ["8000:8000",]
