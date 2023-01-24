@@ -1,0 +1,8 @@
+../env/
+../.idea/
+
+
+.env
+
+.log
+.postgres-data

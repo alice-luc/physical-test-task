@@ -1,17 +1,16 @@
 import os
 
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv()
-print(os.getenv('SECRET_KEY'))
-SECRET_KEY = os.getenv('SECRET_KEY')
+# load_dotenv()
+SECRET_KEY = os.environ['SECRET_KEY']
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', 'django']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -59,10 +58,13 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USERNAME'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': 'localhost',
+        'NAME': os.environ['POSTGRES_DB'],
+        'USER': os.environ['POSTGRES_USER'],
+        'PASSWORD': os.environ['POSTGRES_PASSWORD'],
+        # 'NAME': os.environ['DB_NAME'],
+        # 'USER': os.environ['DB_USERNAME'],
+        # 'PASSWORD': os.environ['DB_PASSWORD'],
+        'HOST': 'postgres',
         'PORT': '5432',
     }
 }
@@ -98,7 +100,13 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'django_app/static'),
+]
+STATIC_ROOT = '/static'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = 'media/'
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
