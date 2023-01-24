@@ -4,9 +4,9 @@
 1. Clone repository to local directory
 2. Install [docker](https://docs.docker.com/engine/install/ubuntu/)
 3. Install [docker-compose](https://docs.docker.com/compose/install/)
-4. Run `cp .env.example .env`
+4. Run `cp .env.example .env` to create environments
 5. Run `make build` to create images and build containers
-6. run `make beautiful` to collect staticfiles
+6. Run `make beautiful` to collect staticfiles
 7. Run `make migrations` to set up db dependencies
 8. Run `make superuser` to create superuser and fill the data interactively
 
