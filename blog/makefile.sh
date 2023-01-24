@@ -11,6 +11,9 @@ migrate:
 superuser:
 	docker-compose exec -it django_app python manage.py createsuperuser
 
+test:
+	docker-compose exec django_app python manage.py test
+
 stop:
 	docker-compose down
 
