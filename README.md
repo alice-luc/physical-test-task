@@ -6,7 +6,8 @@
 5. Run `make build` to create images and build containers
 6. Run `make beautiful` to collect staticfiles
 7. Run `make migrations` to set up db dependencies
-8. Run `make superuser` to create superuser and fill the data interactively
+8. Run `make test` to run tests
+9. Run `make superuser` to create superuser and fill the data interactively
 
 
 # To clean up the services
